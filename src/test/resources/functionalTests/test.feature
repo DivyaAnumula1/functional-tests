@@ -1,5 +1,5 @@
 Feature: Functional test sample
-  Background: User generates a token for authorization
+  Background: User generates a token for authorisation
     Scenario: Invoke multiplications API
       Given calculations API is available
       When invoke the API with a user
