@@ -1,2 +1,8 @@
-package com.example.restservice.config;public class UnitTestConfig {
+package com.example.restservice.config;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class UnitTestConfig {
+
 }

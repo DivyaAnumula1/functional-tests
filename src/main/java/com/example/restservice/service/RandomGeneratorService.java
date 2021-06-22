@@ -1,2 +1,5 @@
-package com.example.restservice.service;public interface RandomGeneratorService {
+package com.example.restservice.service;
+
+public interface RandomGeneratorService {
+    int generateRandomFactor();
 }
