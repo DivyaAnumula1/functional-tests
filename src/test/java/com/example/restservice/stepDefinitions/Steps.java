@@ -31,7 +31,7 @@ public class Steps {
     @Autowired
     RandomGeneratorService randomGeneratorService;
 
-    @InjectMocks
+    @Autowired
     MultiplcationService multiplcationService;
 
     @BeforeStep
