@@ -1,19 +1,17 @@
 package com.example.restservice.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-@RequiredArgsConstructor
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 public class Multiplication {
-    private final int factorA;
-    private final int factorB;
+    private int factorA;
+    private int factorB;
 
-    Multiplication() {
-        this(0,0);
+    public Multiplication(int factorA, int factorB) {
+        factorA = this.factorA;
+        factorB = this.factorB;
     }
 }

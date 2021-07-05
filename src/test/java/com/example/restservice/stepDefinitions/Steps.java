@@ -1,5 +1,7 @@
 package com.example.restservice.stepDefinitions;
 
+import com.example.restservice.client.MultiplicationClient;
+import com.example.restservice.config.TestConfig;
 import com.example.restservice.domain.Multiplication;
 import com.example.restservice.service.MultiplcationService;
 import com.example.restservice.service.MultiplicationServiceImpl;
@@ -9,21 +11,9 @@ import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Random;
-
-import static org.mockito.Mockito.when;
+import org.springframework.core.env.Environment;
 
 @Configuration
 public class Steps {
@@ -34,21 +24,28 @@ public class Steps {
     @Autowired
     MultiplcationService multiplcationService;
 
+    private MultiplicationClient multiplicationClient;
+    private TestConfig testConfig;
+
     @BeforeStep
     public void before() {
         randomGeneratorService = new RandomGeneratorServiceImpl();
         multiplcationService = new MultiplicationServiceImpl(randomGeneratorService);
+        testConfig = new TestConfig();
     }
 
     @Given("calculations API is available")
-    public void greetingAPI() {
+    public void greetingApi() {
 
     }
 
     @When("invoke the API with a user")
     public void invoke() {
-        //randomGeneratorService.generateRandomFactor();
-        Multiplication multiplication = multiplcationService.createRandomMultiplcation();
+        Multiplication multiplication =
+                new Multiplication(randomGeneratorService.generateRandomFactor()
+                        ,randomGeneratorService.generateRandomFactor());
+        //System.out.println("Steps env" + env.getActiveProfiles());
+        testConfig.loadConfigsBasedOnProfile(multiplication);
     }
     @Then("response should be valid")
     public void responseValidation() {
